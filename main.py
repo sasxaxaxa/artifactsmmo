@@ -15,5 +15,3 @@ from functions import *
 #
 # thread4 = threading.Thread(target=gathering, args=("Kacha", 50))
 # thread4.start()
-print(2 + 2)
-print("zaeb")
