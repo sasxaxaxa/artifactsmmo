@@ -1,6 +1,11 @@
 import threading
 from functions import *
 
+create_char("Rostic", "men2")
+
+
+
+
 # thread0 = threading.Thread(target=fight_monster, args=("Miya", 50))
 # thread0.start()
 #

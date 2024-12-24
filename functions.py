@@ -4,6 +4,9 @@ import time
 from parse_file import *
 
 
+token = parse_file(r'ur_path')
+
+
 def get_coordinates():
     with open('coordinates.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
@@ -79,7 +82,11 @@ def ge_buy(name, code, quantity, price):
     call("ge/buy", payload, name)
 
 
-token = parse_file(r'ur_path')
+def create_char(name_char, skin_char):
+    payload = "{" + f"\n  \"name\": \"{name_char}\",\n  \"skin\": \"{skin_char}\"\n" + "}"
+    post("/characters/create", payload)
+
+
 def call(type_of_action, payload, name):
     conn = http.client.HTTPSConnection("api.artifactsmmo.com")
     headers = {
@@ -95,3 +102,21 @@ def call(type_of_action, payload, name):
     print(data)
 
     return data
+
+
+def post(type_of_action, payload):
+    conn = http.client.HTTPSConnection("api.artifactsmmo.com")
+    headers = {
+        'Content-Type': "application/json",
+        'Accept': "application/json",
+        'Authorization': "Bearer " + token
+    }
+    url = f"/{payload}"
+    conn.request("POST", url, payload, headers)
+
+    res = conn.getresponse()
+    data = res.read().decode("utf-8")
+    print(data)
+
+    return data
+
